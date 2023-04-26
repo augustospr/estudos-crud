@@ -1,6 +1,8 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Button, Container, Grid, TextField } from '@mui/material'
 import { ItemList } from "../components/ItemList"
+import axios from "axios";
+// import { api } from "../provider";
 
 export const Home = () => {
 
@@ -11,11 +13,34 @@ export const Home = () => {
   const [id, setId] = useState(0);
 
   const addItem = (e) => {
-    const obj = { name: name, age: age, email: email };
     e.preventDefault();
-    setId(id + 1);
-    setItems([...items, obj]);
+    const obj = { name: name, age: age, email: email };
+    axios.post('/https://crudcrud.com/api/3ee2fa57b760474aac2597a3e2bbe8a2',
+      obj
+    )
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    getApiData();
   }
+
+  const getApiData = () => {
+    try {
+      axios.get("https://crudcrud.com/api/3ee2fa57b760474aac2597a3e2bbe8a2")
+        .then((res) => console.log(res.data));
+      // .then((data) => console.log(data.json()));
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    getApiData();
+  }, [])
 
   return (
     <>
