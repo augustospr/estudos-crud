@@ -15,7 +15,7 @@ export const Home = () => {
   const addItem = (e) => {
     e.preventDefault();
     const obj = { name: name, age: age, email: email };
-    axios.post('/https://crudcrud.com/api/3ee2fa57b760474aac2597a3e2bbe8a2',
+    axios.post('https://crudcrud.com/api/a0b24dfe902c418b86077d375fed7c49/register',
       obj
     )
       .then((res) => {
@@ -28,10 +28,15 @@ export const Home = () => {
     getApiData();
   }
 
+  const removeItem = (id) => {
+    axios.delete(`https://crudcrud.com/api/a0b24dfe902c418b86077d375fed7c49/register/${id}`);
+    getApiData();
+  }
+
   const getApiData = () => {
     try {
-      axios.get("https://crudcrud.com/api/3ee2fa57b760474aac2597a3e2bbe8a2")
-        .then((res) => console.log(res.data));
+      axios.get("https://crudcrud.com/api/a0b24dfe902c418b86077d375fed7c49/register")
+        .then((res) => setItems(res.data));
       // .then((data) => console.log(data.json()));
     } catch (err) {
       console.log(err);
@@ -99,8 +104,8 @@ export const Home = () => {
               <h2>Lista de cadastrados</h2>
             </Grid>
             {items.map((item) => (
-              <Grid item xs={12} lg={8}>
-                <ItemList item={item} key={item.id} />
+              <Grid item key={item._id} xs={12} lg={8}>
+                <ItemList item={item} removeItem={removeItem} />
               </Grid>
             ))}
           </Grid>
