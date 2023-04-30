@@ -10,12 +10,11 @@ export const Home = () => {
   const [name, setName] = useState("");
   const [age, setAge] = useState(0);
   const [email, setEmail] = useState("");
-  const [id, setId] = useState(0);
 
   const addItem = (e) => {
     e.preventDefault();
     const obj = { name: name, age: age, email: email };
-    axios.post('https://crudcrud.com/api/a0b24dfe902c418b86077d375fed7c49/register',
+    axios.post('https://crudcrud.com/api/847767ec0afe4a3d96c386e683337d2d/register',
       obj
     )
       .then((res) => {
@@ -29,15 +28,14 @@ export const Home = () => {
   }
 
   const removeItem = (id) => {
-    axios.delete(`https://crudcrud.com/api/a0b24dfe902c418b86077d375fed7c49/register/${id}`);
+    axios.delete(`https://crudcrud.com/api/847767ec0afe4a3d96c386e683337d2d/register/${id}`);
     getApiData();
   }
 
   const getApiData = () => {
     try {
-      axios.get("https://crudcrud.com/api/a0b24dfe902c418b86077d375fed7c49/register")
+      axios.get("https://crudcrud.com/api/847767ec0afe4a3d96c386e683337d2d/register")
         .then((res) => setItems(res.data));
-      // .then((data) => console.log(data.json()));
     } catch (err) {
       console.log(err);
     }
