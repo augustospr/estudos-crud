@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react"
 import { Button, Container, Grid, TextField } from '@mui/material'
 import { ItemList } from "../components/ItemList"
 import axios from "axios";
-// import { api } from "../provider";
 
 export const Home = () => {
 
@@ -14,7 +13,7 @@ export const Home = () => {
   const addItem = (e) => {
     e.preventDefault();
     const obj = { name: name, age: age, email: email };
-    axios.post('https://crudcrud.com/api/847767ec0afe4a3d96c386e683337d2d/register',
+    axios.post('https://crudcrud.com/api/d1369eb17e5447459a1d439cfcb39af3/register',
       obj
     )
       .then((res) => {
@@ -28,13 +27,21 @@ export const Home = () => {
   }
 
   const removeItem = (id) => {
-    axios.delete(`https://crudcrud.com/api/847767ec0afe4a3d96c386e683337d2d/register/${id}`);
+    axios.delete(`https://crudcrud.com/api/d1369eb17e5447459a1d439cfcb39af3/register/${id}`);
+    getApiData();
+  }
+
+  const editItem = (newText, newAge, newEmail, id) => {
+    const newObj = { name: newText, age: newAge, email: newEmail };
+    axios.put(`https://crudcrud.com/api/d1369eb17e5447459a1d439cfcb39af3/register/${id}`,
+      newObj
+    );
     getApiData();
   }
 
   const getApiData = () => {
     try {
-      axios.get("https://crudcrud.com/api/847767ec0afe4a3d96c386e683337d2d/register")
+      axios.get("https://crudcrud.com/api/d1369eb17e5447459a1d439cfcb39af3/register")
         .then((res) => setItems(res.data));
     } catch (err) {
       console.log(err);
@@ -43,7 +50,7 @@ export const Home = () => {
 
   useEffect(() => {
     getApiData();
-  }, [])
+  }, []);
 
   return (
     <>
@@ -103,7 +110,7 @@ export const Home = () => {
             </Grid>
             {items.map((item) => (
               <Grid item key={item._id} xs={12} lg={8}>
-                <ItemList item={item} removeItem={removeItem} />
+                <ItemList item={item} removeItem={removeItem} editItem={editItem} />
               </Grid>
             ))}
           </Grid>
