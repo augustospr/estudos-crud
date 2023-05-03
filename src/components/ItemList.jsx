@@ -31,12 +31,12 @@ export const ItemList = ({ item, removeItem, editItem }) => {
           }
           disablePadding
         >
-          <ListItemButton role={undefined} dense onClick={handleClickOpen} >
+          <ListItemButton role={undefined} onClick={handleClickOpen} dense >
             <ListItemText primary={`Nome: ` + item.name} />
             <ListItemText primary={`Idade: ` + item.age} />
             <ListItemText primary={`Email: ` + item.email} />
           </ListItemButton>
-          <EditDialog open={open} handleClose={handleClose} item={item} editItem={editItem} />
+          <EditDialog open={open} item={item} editItem={editItem} handleClose={handleClose} />
         </ListItem>
       </Paper>
     </List>

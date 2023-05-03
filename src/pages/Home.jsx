@@ -6,46 +6,39 @@ import axios from "axios";
 export const Home = () => {
 
   const [items, setItems] = useState([]);
+
   const [name, setName] = useState("");
   const [age, setAge] = useState(0);
   const [email, setEmail] = useState("");
 
+  const getApiData = () => {
+    try {
+      axios.get("https://crudcrud.com/api/a738f048242d40e899f1a31e99b2444e/register")
+        .then((res) => setItems(res.data));
+    } catch (err) {
+      console.log(`Error: ` + err);
+    }
+  }
+
   const addItem = (e) => {
     e.preventDefault();
     const obj = { name: name, age: age, email: email };
-    axios.post('https://crudcrud.com/api/d1369eb17e5447459a1d439cfcb39af3/register',
-      obj
-    )
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
+    axios.post(`https://crudcrud.com/api/a738f048242d40e899f1a31e99b2444e/register`, obj);
+    setName("");
+    setAge(0);
+    setEmail("");
     getApiData();
   }
 
   const removeItem = (id) => {
-    axios.delete(`https://crudcrud.com/api/d1369eb17e5447459a1d439cfcb39af3/register/${id}`);
+    axios.delete(`https://crudcrud.com/api/a738f048242d40e899f1a31e99b2444e/register/${id}`);
     getApiData();
   }
 
-  const editItem = (newText, newAge, newEmail, id) => {
-    const newObj = { name: newText, age: newAge, email: newEmail };
-    axios.put(`https://crudcrud.com/api/d1369eb17e5447459a1d439cfcb39af3/register/${id}`,
-      newObj
-    );
+  const editItem = (newName, newAge, newEmail, id) => {
+    const newObj = { name: newName, age: newAge, email: newEmail };
+    axios.put(`https://crudcrud.com/api/a738f048242d40e899f1a31e99b2444e/register/${id}`, newObj);
     getApiData();
-  }
-
-  const getApiData = () => {
-    try {
-      axios.get("https://crudcrud.com/api/d1369eb17e5447459a1d439cfcb39af3/register")
-        .then((res) => setItems(res.data));
-    } catch (err) {
-      console.log(err);
-    }
   }
 
   useEffect(() => {

@@ -10,12 +10,12 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 export default function EditDialog({ open, handleClose, item, editItem }) {
 
-  const [newText, setNewText] = useState(item.name);
+  const [newName, setNewName] = useState(item.name);
   const [newAge, setNewAge] = useState(item.age);
   const [newEmail, setNewEmail] = useState(item.email);
 
-  const newItem = () => {
-    editItem(newText, newAge, newEmail, item._id);
+  const sendNewObj = () => {
+    editItem(newName, newAge, newEmail, item._id);
     handleClose();
   }
 
@@ -31,8 +31,8 @@ export default function EditDialog({ open, handleClose, item, editItem }) {
             type="text"
             fullWidth
             variant="standard"
-            value={newText}
-            onChange={(e) => setNewText(e.target.value)}
+            value={newName}
+            onChange={(e) => setNewName(e.target.value)}
           />
           <TextField
             autoFocus
@@ -57,7 +57,7 @@ export default function EditDialog({ open, handleClose, item, editItem }) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>
-          <Button onClick={newItem}>Editar</Button>
+          <Button onClick={sendNewObj}>Editar</Button>
         </DialogActions>
       </Dialog>
     </div>
