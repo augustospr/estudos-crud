@@ -6,38 +6,34 @@ import axios from "axios";
 export const Home = () => {
 
   const [items, setItems] = useState([]);
-
   const [name, setName] = useState("");
   const [age, setAge] = useState(0);
   const [email, setEmail] = useState("");
 
   const getApiData = () => {
     try {
-      axios.get("https://crudcrud.com/api/a738f048242d40e899f1a31e99b2444e/register")
+      axios.get(`https://crudcrud.com/api/1b04613da412442dbf62c28c237c99dc/register`)
         .then((res) => setItems(res.data));
     } catch (err) {
-      console.log(`Error: ` + err);
+      console.log(err);
     }
   }
 
   const addItem = (e) => {
     e.preventDefault();
     const obj = { name: name, age: age, email: email };
-    axios.post(`https://crudcrud.com/api/a738f048242d40e899f1a31e99b2444e/register`, obj);
-    setName("");
-    setAge(0);
-    setEmail("");
+    axios.post(`https://crudcrud.com/api/1b04613da412442dbf62c28c237c99dc/register`, obj);
     getApiData();
   }
 
-  const removeItem = (id) => {
-    axios.delete(`https://crudcrud.com/api/a738f048242d40e899f1a31e99b2444e/register/${id}`);
+  const deleteItem = (id) => {
+    axios.delete(`https://crudcrud.com/api/1b04613da412442dbf62c28c237c99dc/register/${id}`);
     getApiData();
   }
 
   const editItem = (newName, newAge, newEmail, id) => {
     const newObj = { name: newName, age: newAge, email: newEmail };
-    axios.put(`https://crudcrud.com/api/a738f048242d40e899f1a31e99b2444e/register/${id}`, newObj);
+    axios.put(`https://crudcrud.com/api/1b04613da412442dbf62c28c237c99dc/register/${id}`, newObj);
     getApiData();
   }
 
@@ -58,8 +54,8 @@ export const Home = () => {
                 type="text"
                 label="Nome"
                 variant="outlined"
-                onChange={(e) => setName(e.target.value)}
                 value={name}
+                onChange={(e) => setName(e.target.value)}
                 fullWidth
                 required
               />
@@ -69,8 +65,8 @@ export const Home = () => {
                 type="number"
                 label="Idade"
                 variant="outlined"
-                onChange={(e) => setAge(e.target.value)}
                 value={age}
+                onChange={(e) => setAge(e.target.value)}
                 fullWidth
                 required
               />
@@ -80,8 +76,8 @@ export const Home = () => {
                 type="email"
                 label="Email"
                 variant="outlined"
-                onChange={(e) => setEmail(e.target.value)}
                 value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 fullWidth
                 required
               />
@@ -102,8 +98,8 @@ export const Home = () => {
               <h2>Lista de cadastrados</h2>
             </Grid>
             {items.map((item) => (
-              <Grid item key={item._id} xs={12} lg={8}>
-                <ItemList item={item} removeItem={removeItem} editItem={editItem} />
+              <Grid key={item._id} item xs={12} lg={8}>
+                <ItemList item={item} deleteItem={deleteItem} editItem={editItem} />
               </Grid>
             ))}
           </Grid>

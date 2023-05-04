@@ -8,7 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { Paper } from "@mui/material";
 import EditDialog from "./Dialog";
 
-export const ItemList = ({ item, removeItem, editItem }) => {
+export const ItemList = ({ item, deleteItem, editItem }) => {
 
   const [open, setOpen] = useState(false);
 
@@ -25,7 +25,7 @@ export const ItemList = ({ item, removeItem, editItem }) => {
       <Paper>
         <ListItem sx={{ padding: '9px' }}
           secondaryAction={
-            <IconButton edge="end" aria-label="comments" onClick={() => removeItem(item._id)}>
+            <IconButton edge="end" aria-label="comments" onClick={() => deleteItem(item._id)}>
               <DeleteIcon />
             </IconButton>
           }
@@ -36,7 +36,9 @@ export const ItemList = ({ item, removeItem, editItem }) => {
             <ListItemText primary={`Idade: ` + item.age} />
             <ListItemText primary={`Email: ` + item.email} />
           </ListItemButton>
-          <EditDialog open={open} item={item} editItem={editItem} handleClose={handleClose} />
+
+          <EditDialog open={open} handleClose={handleClose} item={item} editItem={editItem} />
+          
         </ListItem>
       </Paper>
     </List>

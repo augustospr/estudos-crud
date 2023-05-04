@@ -14,7 +14,7 @@ export default function EditDialog({ open, handleClose, item, editItem }) {
   const [newAge, setNewAge] = useState(item.age);
   const [newEmail, setNewEmail] = useState(item.email);
 
-  const sendNewObj = () => {
+  const sendNewInfos = () => {
     editItem(newName, newAge, newEmail, item._id);
     handleClose();
   }
@@ -57,7 +57,7 @@ export default function EditDialog({ open, handleClose, item, editItem }) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>
-          <Button onClick={sendNewObj}>Editar</Button>
+          <Button onClick={sendNewInfos}>Editar</Button>
         </DialogActions>
       </Dialog>
     </div>
