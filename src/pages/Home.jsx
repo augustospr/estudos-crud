@@ -12,7 +12,7 @@ export const Home = () => {
 
   const getApiData = () => {
     try {
-      axios.get(`https://crudcrud.com/api/1b04613da412442dbf62c28c237c99dc/register`)
+      axios.get(`https://crudcrud.com/api/f979d7afacf644ee98d8f6df27ef98f0/register`)
         .then((res) => setItems(res.data));
     } catch (err) {
       console.log(err);
@@ -22,18 +22,18 @@ export const Home = () => {
   const addItem = (e) => {
     e.preventDefault();
     const obj = { name: name, age: age, email: email };
-    axios.post(`https://crudcrud.com/api/1b04613da412442dbf62c28c237c99dc/register`, obj);
+    axios.post(`https://crudcrud.com/api/f979d7afacf644ee98d8f6df27ef98f0/register`, obj);
     getApiData();
   }
 
   const deleteItem = (id) => {
-    axios.delete(`https://crudcrud.com/api/1b04613da412442dbf62c28c237c99dc/register/${id}`);
+    axios.delete(`https://crudcrud.com/api/f979d7afacf644ee98d8f6df27ef98f0/register/${id}`);
     getApiData();
   }
 
   const editItem = (newName, newAge, newEmail, id) => {
     const newObj = { name: newName, age: newAge, email: newEmail };
-    axios.put(`https://crudcrud.com/api/1b04613da412442dbf62c28c237c99dc/register/${id}`, newObj);
+    axios.put(`https://crudcrud.com/api/f979d7afacf644ee98d8f6df27ef98f0/register/${id}`, newObj);
     getApiData();
   }
 
