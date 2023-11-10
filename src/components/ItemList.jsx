@@ -8,7 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { Paper } from "@mui/material";
 import EditDialog from "./Dialog";
 
-export const ItemList = ({ item, deleteItem, editItem }) => {
+export const ItemList = ({ card, deleteItem, editItem }) => {
 
   const [open, setOpen] = useState(false);
 
@@ -25,20 +25,20 @@ export const ItemList = ({ item, deleteItem, editItem }) => {
       <Paper>
         <ListItem sx={{ padding: '9px' }}
           secondaryAction={
-            <IconButton edge="end" aria-label="comments" onClick={() => deleteItem(item._id)}>
+            <IconButton edge="end" aria-label="comments" onClick={() => deleteItem(card._id)}>
               <DeleteIcon />
             </IconButton>
           }
           disablePadding
         >
           <ListItemButton role={undefined} onClick={handleClickOpen} dense >
-            <ListItemText primary={`Nome: ` + item.name} />
-            <ListItemText primary={`Idade: ` + item.age} />
-            <ListItemText primary={`Email: ` + item.email} />
+            <ListItemText primary={`Nome: ` + `${card.name}`} />
+            <ListItemText primary={`Idade: ` + `${card.age}`} />
+            <ListItemText primary={`Email: ` + `${card.email}`} />
           </ListItemButton>
 
-          <EditDialog open={open} handleClose={handleClose} item={item} editItem={editItem} />
-          
+          <EditDialog open={open} handleClose={handleClose} editItem={editItem} card={card} />
+
         </ListItem>
       </Paper>
     </List>

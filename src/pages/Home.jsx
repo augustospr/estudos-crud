@@ -5,35 +5,36 @@ import axios from "axios";
 
 export const Home = () => {
 
-  const [items, setItems] = useState([]);
+  const [cards, setCards] = useState([]);
   const [name, setName] = useState("");
-  const [age, setAge] = useState(0);
+  const [age, setAge] = useState("");
   const [email, setEmail] = useState("");
 
   const getApiData = () => {
-    try {
-      axios.get(`https://crudcrud.com/api/f979d7afacf644ee98d8f6df27ef98f0/register`)
-        .then((res) => setItems(res.data));
-    } catch (err) {
-      console.log(err);
-    }
-  }
+    axios.get(`https://crudcrud.com/api/f979d7afacf644ee98d8f6df27ef98f0/register/`).
+      then((res) => {
+        setCards(res.data);
+      });
+  };
 
   const addItem = (e) => {
     e.preventDefault();
     const obj = { name: name, age: age, email: email };
-    axios.post(`https://crudcrud.com/api/f979d7afacf644ee98d8f6df27ef98f0/register`, obj);
+    axios.post(`https://crudcrud.com/api/f979d7afacf644ee98d8f6df27ef98f0/register/`, obj);
     getApiData();
-  }
+    getApiData();
+  };
 
   const deleteItem = (id) => {
     axios.delete(`https://crudcrud.com/api/f979d7afacf644ee98d8f6df27ef98f0/register/${id}`);
     getApiData();
-  }
+    getApiData();
+  };
 
   const editItem = (newName, newAge, newEmail, id) => {
-    const newObj = { name: newName, age: newAge, email: newEmail };
+    const newObj = {name: newName, age: newAge, email: newEmail}
     axios.put(`https://crudcrud.com/api/f979d7afacf644ee98d8f6df27ef98f0/register/${id}`, newObj);
+    getApiData();
     getApiData();
   }
 
@@ -97,11 +98,13 @@ export const Home = () => {
             <Grid item xs={12} textAlign="center">
               <h2>Lista de cadastrados</h2>
             </Grid>
-            {items.map((item) => (
-              <Grid key={item._id} item xs={12} lg={8}>
-                <ItemList item={item} deleteItem={deleteItem} editItem={editItem} />
+
+            {cards.map((card) => (
+              <Grid key={card._id} item xs={12} lg={8}>
+                <ItemList card={card} deleteItem={deleteItem} editItem={editItem} />
               </Grid>
             ))}
+
           </Grid>
         </form>
       </Container>
