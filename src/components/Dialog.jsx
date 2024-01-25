@@ -10,14 +10,19 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 export default function EditDialog({ open, handleClose, editItem, card }) {
 
-  const [newName, setNewName] = useState(card.name);
-  const [newAge, setNewAge] = useState(card.age);
+  const [newName, setNewName] = useState(card.nome);
+  const [newAge, setNewAge] = useState(card.idade);
   const [newEmail, setNewEmail] = useState(card.email);
 
-  const sendNewObj = () => {
-    editItem(newName, newAge, newEmail, card._id);
+  const sendNewInfos = () => {
+    const newObj = {
+      nome: newName,
+      idade: newAge,
+      email: newEmail
+    }
+    editItem(newObj, card._id);
     handleClose();
-  };
+  }
 
   return (
     <div>
@@ -57,7 +62,7 @@ export default function EditDialog({ open, handleClose, editItem, card }) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>
-          <Button onClick={sendNewObj}>Editar</Button>
+          <Button onClick={sendNewInfos}>Editar</Button>
         </DialogActions>
       </Dialog>
     </div>

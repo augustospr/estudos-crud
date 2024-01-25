@@ -5,35 +5,39 @@ import axios from "axios";
 
 export const Home = () => {
 
-  const [cards, setCards] = useState([]);
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [email, setEmail] = useState("");
 
+  const [cards, setCards] = useState([]);
+
   const getApiData = () => {
-    axios.get(`https://crudcrud.com/api/f979d7afacf644ee98d8f6df27ef98f0/register/`).
-      then((res) => {
+    axios.get("https://crudcrud.com/api/6a9f6369869645bdabd0a5bb0cf55754/register")
+      .then((res) => {
         setCards(res.data);
       });
   };
 
   const addItem = (e) => {
     e.preventDefault();
-    const obj = { name: name, age: age, email: email };
-    axios.post(`https://crudcrud.com/api/f979d7afacf644ee98d8f6df27ef98f0/register/`, obj);
+    const obj = {
+      nome: name,
+      idade: age,
+      email: email
+    }
+    axios.post("https://crudcrud.com/api/6a9f6369869645bdabd0a5bb0cf55754/register", obj);
     getApiData();
     getApiData();
   };
 
   const deleteItem = (id) => {
-    axios.delete(`https://crudcrud.com/api/f979d7afacf644ee98d8f6df27ef98f0/register/${id}`);
+    axios.delete(`https://crudcrud.com/api/6a9f6369869645bdabd0a5bb0cf55754/register/${id}`)
     getApiData();
     getApiData();
   };
 
-  const editItem = (newName, newAge, newEmail, id) => {
-    const newObj = {name: newName, age: newAge, email: newEmail}
-    axios.put(`https://crudcrud.com/api/f979d7afacf644ee98d8f6df27ef98f0/register/${id}`, newObj);
+  const editItem = (newObj, id) => {
+    axios.put(`https://crudcrud.com/api/6a9f6369869645bdabd0a5bb0cf55754/register/${id}`, newObj)
     getApiData();
     getApiData();
   }
@@ -99,7 +103,7 @@ export const Home = () => {
               <h2>Lista de cadastrados</h2>
             </Grid>
 
-            {cards.map((card) => (
+            {cards.map(card => (
               <Grid key={card._id} item xs={12} lg={8}>
                 <ItemList card={card} deleteItem={deleteItem} editItem={editItem} />
               </Grid>

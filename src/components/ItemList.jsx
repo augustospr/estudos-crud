@@ -32,9 +32,9 @@ export const ItemList = ({ card, deleteItem, editItem }) => {
           disablePadding
         >
           <ListItemButton role={undefined} onClick={handleClickOpen} dense >
-            <ListItemText primary={`Nome: ` + `${card.name}`} />
-            <ListItemText primary={`Idade: ` + `${card.age}`} />
-            <ListItemText primary={`Email: ` + `${card.email}`} />
+            <ListItemText primary={`Nome: ` + card.nome} />
+            <ListItemText primary={`Idade: ` + card.idade} />
+            <ListItemText primary={`Email: ` + card.email} />
           </ListItemButton>
 
           <EditDialog open={open} handleClose={handleClose} editItem={editItem} card={card} />
