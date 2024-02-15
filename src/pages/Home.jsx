@@ -12,7 +12,7 @@ export const Home = () => {
   const [cards, setCards] = useState([]);
 
   const getApiData = () => {
-    axios.get("https://crudcrud.com/api/6a9f6369869645bdabd0a5bb0cf55754/register")
+    axios.get("https://crudcrud.com/api/9a6c3445d266451c96e2f884bc8c40eb/register")
       .then((res) => {
         setCards(res.data);
       });
@@ -25,19 +25,19 @@ export const Home = () => {
       idade: age,
       email: email
     }
-    axios.post("https://crudcrud.com/api/6a9f6369869645bdabd0a5bb0cf55754/register", obj);
+    axios.post("https://crudcrud.com/api/9a6c3445d266451c96e2f884bc8c40eb/register", obj);
     getApiData();
     getApiData();
   };
 
   const deleteItem = (id) => {
-    axios.delete(`https://crudcrud.com/api/6a9f6369869645bdabd0a5bb0cf55754/register/${id}`)
+    axios.delete(`https://crudcrud.com/api/9a6c3445d266451c96e2f884bc8c40eb/register/${id}`)
     getApiData();
     getApiData();
   };
 
   const editItem = (newObj, id) => {
-    axios.put(`https://crudcrud.com/api/6a9f6369869645bdabd0a5bb0cf55754/register/${id}`, newObj)
+    axios.put(`https://crudcrud.com/api/9a6c3445d266451c96e2f884bc8c40eb/register/${id}`, newObj)
     getApiData();
     getApiData();
   }
